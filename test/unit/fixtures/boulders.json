@@ -1,0 +1,202 @@
+{
+  "all": {
+    "success": {
+      "res": {
+        "statusCode": 200,
+        "headers": {
+          "content-type": "application/json"
+        }
+      },
+      "body": {
+        "status": "success",
+        "data": [
+          {
+            "id": 1,
+            "type_name": "boulder",
+            "name": "Create An App",
+            "message": "Create an app to blah",
+            "parent_id": null,
+            "active": true,
+            "completed_at": null,
+            "created_at": "2018-02-17T02:54:48.047Z",
+            "updated_at": "2018-02-17T02:54:48.047Z"
+          },
+          {
+            "id": 2,
+            "type_name": "boulder",
+            "name": "Create An App 2",
+            "message": "Create an app to yeeeahhh",
+            "parent_id": null,
+            "active": true,
+            "completed_at": null,
+            "created_at": "2018-02-17T02:54:48.050Z",
+            "updated_at": "2018-02-17T02:54:48.050Z"
+          },
+          {
+            "id": 3,
+            "type_name": "boulder",
+            "name": "Kick rocks",
+            "message": "Create an app to blah",
+            "parent_id": null,
+            "active": true,
+            "completed_at": null,
+            "created_at": "2018-02-17T02:54:48.052Z",
+            "updated_at": "2018-02-17T02:54:48.052Z"
+          }
+        ]
+      }
+    }
+  },
+  "single": {
+    "success": {
+      "res": {
+        "statusCode": 200,
+        "headers": {
+          "content-type": "application/json"
+        }
+      },
+      "body": {
+        "status": "success",
+        "data": [
+          {
+            "id": 3,
+            "type_name": "boulder",
+            "name": "Kick rocks",
+            "message": "Create an app to blah",
+            "parent_id": null,
+            "active": true,
+            "completed_at": null,
+            "created_at": "2018-02-17T02:54:48.052Z",
+            "updated_at": "2018-02-17T02:54:48.052Z"
+          }
+        ]
+      }
+    },
+    "failure": {
+      "res": {
+        "statusCode": 404,
+        "headers": {
+          "content-type": "application/json"
+        }
+      },
+      "body": {
+        "status": "error",
+        "message": "That boulder does not exist."
+      }
+    }
+  },
+  "add": {
+    "success": {
+      "res": {
+        "statusCode": 201,
+        "headers": {
+          "content-type": "application/json"
+        }
+      },
+      "body": {
+        "status": "success",
+        "data": [
+          {
+            "id": 3,
+            "type_name": "boulder",
+            "name": "Kick rocks",
+            "message": "Create an app to blah",
+            "parent_id": null,
+            "active": true,
+            "completed_at": null,
+            "created_at": "2018-02-17T02:54:48.052Z",
+            "updated_at": "2018-02-17T02:54:48.052Z"
+          }
+        ]
+      }
+    },
+    "failure": {
+      "res": {
+        "statusCode": 400,
+        "headers": {
+          "content-type": "application/json"
+        }
+      },
+      "body": {
+        "status": "error",
+        "message": "Something went wrong."
+      }
+    }
+  },
+  "update": {
+    "success": {
+      "res": {
+        "statusCode": 200,
+        "headers": {
+          "content-type": "application/json"
+        }
+      },
+      "body": {
+        "status": "success",
+        "data": [
+          {
+            "id": 3,
+            "type_name": "boulder",
+            "name": "Kick rocks",
+            "message": "Create an app to blah",
+            "parent_id": null,
+            "active": false,
+            "completed_at": null,
+            "created_at": "2018-02-17T02:54:48.052Z",
+            "updated_at": "2018-02-17T02:54:48.052Z"
+          }
+        ]
+      }
+    },
+    "failure": {
+      "res": {
+        "statusCode": 404,
+        "headers": {
+          "content-type": "application/json"
+        }
+      },
+      "body": {
+        "status": "error",
+        "message": "That boulder does not exist."
+      }
+    }
+  },
+  "delete": {
+    "success": {
+      "res": {
+        "statusCode": 200,
+        "headers": {
+          "content-type": "application/json"
+        }
+      },
+      "body": {
+        "status": "success",
+        "data": [
+          {
+            "id": 3,
+            "type_name": "boulder",
+            "name": "Kick rocks",
+            "message": "Create an app to blah",
+            "parent_id": null,
+            "active": true,
+            "completed_at": null,
+            "created_at": "2018-02-17T02:54:48.052Z",
+            "updated_at": "2018-02-17T02:54:48.052Z"
+          }
+        ]
+      }
+    },
+    "failure": {
+      "res": {
+        "statusCode": 404,
+        "headers": {
+          "content-type": "application/json"
+        }
+      },
+      "body": {
+        "status": "error",
+        "message": "That boulder does not exist."
+      }
+    }
+  }
+}
