@@ -1,19 +1,19 @@
 exports.seed = (knex, Promise) => {
-  return knex('boulders').del()
+  return knex('rocks').del()
   .then(() => {
-    return knex('boulders').insert({
+    return knex('rocks').insert({
       name: 'Create An App',
       message: 'Create an app to blah'
     });
   })
   .then(() => {
-    return knex('boulders').insert({
+    return knex('rocks').insert({
       name: 'Create An App 2',
       message: 'Create an app to yeeeahhh'
     });
   })
   .then(() => {
-    return knex('boulders').insert({
+    return knex('rocks').insert({
       name: 'Kick rocks',
       message: 'Create an app to blah'
     });

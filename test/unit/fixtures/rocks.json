@@ -81,7 +81,7 @@
       },
       "body": {
         "status": "error",
-        "message": "That boulder does not exist."
+        "message": "That rock does not exist."
       }
     }
   },
@@ -157,7 +157,7 @@
       },
       "body": {
         "status": "error",
-        "message": "That boulder does not exist."
+        "message": "That rock does not exist."
       }
     }
   },
@@ -195,7 +195,7 @@
       },
       "body": {
         "status": "error",
-        "message": "That boulder does not exist."
+        "message": "That rock does not exist."
       }
     }
   }

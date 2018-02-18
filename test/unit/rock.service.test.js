@@ -5,16 +5,16 @@ const request = require('request');
 const chai = require('chai');
 const should = chai.should();
 
-const boulders = require('./fixtures/boulders.json');
+const rocks = require('./fixtures/rocks.json');
 
 const base = 'http://localhost:1337';
 
-describe('boulder service', () => {
+describe('rock service', () => {
 
   describe.skip('when not stubbed', () => {
-    describe('GET /api/v1/boulders', () => {
-      it('should return all boulders', (done) => {
-        request.get(`${base}/api/v1/boulders`, (err, res, body) => {
+    describe('GET /api/v1/rocks', () => {
+      it('should return all rocks', (done) => {
+        request.get(`${base}/api/v1/rocks`, (err, res, body) => {
           // there should be a 200 status code
           res.statusCode.should.eql(200);
           // the response should be JSON
@@ -25,7 +25,7 @@ describe('boulder service', () => {
           // key-value pair of {"status": "success"}
           body.status.should.eql('success');
           // the JSON response body should have a
-          // key-value pair of {"data": [3 boulder objects]}
+          // key-value pair of {"data": [3 rock objects]}
           body.data.length.should.eql(3);
           // the first object in the data array should
           // have the right keys
@@ -40,9 +40,9 @@ describe('boulder service', () => {
         });
       });
     });
-    describe('GET /api/v1/boulders/:id', () => {
-      it('should respond with a single boulder', (done) => {
-        request.get(`${base}/api/v1/boulders/1`, (err, res, body) => {
+    describe('GET /api/v1/rocks/:id', () => {
+      it('should respond with a single rock', (done) => {
+        request.get(`${base}/api/v1/rocks/1`, (err, res, body) => {
           res.statusCode.should.equal(200);
           res.headers['content-type'].should.contain('application/json');
           body = JSON.parse(body);
@@ -56,19 +56,19 @@ describe('boulder service', () => {
           done();
         });
       });
-      it('should throw an error if the boulder does not exist', (done) => {
-        request.get(`${base}/api/v1/boulders/999`, (err, res, body) => {
+      it('should throw an error if the rock does not exist', (done) => {
+        request.get(`${base}/api/v1/rocks/999`, (err, res, body) => {
           res.statusCode.should.equal(404);
           res.headers['content-type'].should.contain('application/json');
           body = JSON.parse(body);
           body.status.should.eql('error');
-          body.message.should.eql('That boulder does not exist.');
+          body.message.should.eql('That rock does not exist.');
           done();
         });
       });
     });
-    describe('POST /api/v1/boulders', () => {
-      it('should return the boulder that was added', (done) => {
+    describe('POST /api/v1/rocks', () => {
+      it('should return the rock that was added', (done) => {
         const options = {
           method: 'post',
           body: {
@@ -83,7 +83,7 @@ describe('boulder service', () => {
             "updated_at": "2018-02-17T02:54:48.052Z"
           },
           json: true,
-          url: `${base}/api/v1/boulders`
+          url: `${base}/api/v1/rocks`
         };
         request(options, (err, res, body) => {
           res.statusCode.should.equal(201);
@@ -116,12 +116,12 @@ describe('boulder service', () => {
       request.delete.restore();
     });
 
-    describe('GET /api/v1/boulders', () => {
-      it('should return all boulders', (done) => {
+    describe('GET /api/v1/rocks', () => {
+      it('should return all rocks', (done) => {
         this.get.yields(
-          null, boulders.all.success.res, JSON.stringify(boulders.all.success.body)
+          null, rocks.all.success.res, JSON.stringify(rocks.all.success.body)
         );
-        request.get(`${base}/api/v1/boulders`, (err, res, body) => {
+        request.get(`${base}/api/v1/rocks`, (err, res, body) => {
           // there should be a 200 status code
           res.statusCode.should.eql(200);
           // the response should be JSON
@@ -132,7 +132,7 @@ describe('boulder service', () => {
           // key-value pair of {"status": "success"}
           body.status.should.eql('success');
           // the JSON response body should have a
-          // key-value pair of {"data": [3 boulder objects]}
+          // key-value pair of {"data": [3 rock objects]}
           body.data.length.should.eql(3);
           // the first object in the data array should
           // have the right keys
@@ -147,11 +147,11 @@ describe('boulder service', () => {
         });
       });
     });
-    describe('GET /api/v1/boulders/:id', () => {
-      it('should respond with a single boulder', (done) => {
-        const obj = boulders.single.success;
+    describe('GET /api/v1/rocks/:id', () => {
+      it('should respond with a single rock', (done) => {
+        const obj = rocks.single.success;
         this.get.yields(null, obj.res, JSON.stringify(obj.body));
-        request.get(`${base}/api/v1/boulders/3`, (err, res, body) => {
+        request.get(`${base}/api/v1/rocks/3`, (err, res, body) => {
           res.statusCode.should.equal(200);
           res.headers['content-type'].should.contain('application/json');
           body = JSON.parse(body);
@@ -165,21 +165,21 @@ describe('boulder service', () => {
           done();
         });
       });
-      it('should throw an error if the boulder does not exist', (done) => {
-        const obj = boulders.single.failure;
+      it('should throw an error if the rock does not exist', (done) => {
+        const obj = rocks.single.failure;
         this.get.yields(null, obj.res, JSON.stringify(obj.body));
-        request.get(`${base}/api/v1/boulders/999`, (err, res, body) => {
+        request.get(`${base}/api/v1/rocks/999`, (err, res, body) => {
           res.statusCode.should.equal(404);
           res.headers['content-type'].should.contain('application/json');
           body = JSON.parse(body);
           body.status.should.eql('error');
-          body.message.should.eql('That boulder does not exist.');
+          body.message.should.eql('That rock does not exist.');
           done();
         });
       });
     });
-    describe('POST /api/v1/boulders', () => {
-      it('should return the boulder that was added', (done) => {
+    describe('POST /api/v1/rocks', () => {
+      it('should return the rock that was added', (done) => {
         const options = {
           body: {
             "id": 3,
@@ -193,9 +193,9 @@ describe('boulder service', () => {
             "updated_at": "2018-02-17T02:54:48.052Z"
           },
           json: true,
-          url: `${base}/api/v1/boulders`
+          url: `${base}/api/v1/rocks`
         };
-        const obj = boulders.add.success;
+        const obj = rocks.add.success;
         this.post.yields(null, obj.res, JSON.stringify(obj.body));
         request.post(options, (err, res, body) => {
           res.statusCode.should.equal(201);
@@ -215,9 +215,9 @@ describe('boulder service', () => {
         const options = {
           body: { name: 'Kick rocks' },
           json: true,
-          url: `${base}/api/v1/boulders`
+          url: `${base}/api/v1/rocks`
         };
-        const obj = boulders.add.failure;
+        const obj = rocks.add.failure;
         this.post.yields(null, obj.res, JSON.stringify(obj.body));
         request.post(options, (err, res, body) => {
           res.statusCode.should.equal(400);
@@ -229,14 +229,14 @@ describe('boulder service', () => {
         });
       });
     });
-    describe('PUT /api/v1/boulders', () => {
-      it('should return the boulder that was updated', (done) => {
+    describe('PUT /api/v1/rocks', () => {
+      it('should return the rock that was updated', (done) => {
         const options = {
           body: { active: false },
           json: true,
-          url: `${base}/api/v1/boulders/3`
+          url: `${base}/api/v1/rocks/3`
         };
-        const obj = boulders.update.success;
+        const obj = rocks.update.success;
         this.put.yields(null, obj.res, JSON.stringify(obj.body));
         request.put(options, (err, res, body) => {
           res.statusCode.should.equal(200);
@@ -253,29 +253,29 @@ describe('boulder service', () => {
           done();
         });
       });
-      it('should throw an error if the boulder does not exist', (done) => {
+      it('should throw an error if the rock does not exist', (done) => {
         const options = {
           body: { active: false },
           json: true,
-          url: `${base}/api/v1/boulders/5`
+          url: `${base}/api/v1/rocks/5`
         };
-        const obj = boulders.update.failure;
+        const obj = rocks.update.failure;
         this.put.yields(null, obj.res, JSON.stringify(obj.body));
         request.put(options, (err, res, body) => {
           res.statusCode.should.equal(404);
           res.headers['content-type'].should.contain('application/json');
           body = JSON.parse(body);
           body.status.should.eql('error');
-          body.message.should.eql('That boulder does not exist.');
+          body.message.should.eql('That rock does not exist.');
           done();
         });
       });
     });
-    describe('DELETE /api/v1/boulders/:id', () => {
-      it('should return the boulder that was deleted', (done) => {
-        const obj = boulders.delete.success;
+    describe('DELETE /api/v1/rocks/:id', () => {
+      it('should return the rock that was deleted', (done) => {
+        const obj = rocks.delete.success;
         this.delete.yields(null, obj.res, JSON.stringify(obj.body));
-        request.delete(`${base}/api/v1/boulders/5`, (err, res, body) => {
+        request.delete(`${base}/api/v1/rocks/5`, (err, res, body) => {
           res.statusCode.should.equal(200);
           res.headers['content-type'].should.contain('application/json');
           body = JSON.parse(body);
@@ -289,15 +289,15 @@ describe('boulder service', () => {
           done();
         });
       });
-      it('should throw an error if the boulder does not exist', (done) => {
-        const obj = boulders.delete.failure;
+      it('should throw an error if the rock does not exist', (done) => {
+        const obj = rocks.delete.failure;
         this.delete.yields(null, obj.res, JSON.stringify(obj.body));
-        request.delete(`${base}/api/v1/boulders/5`, (err, res, body) => {
+        request.delete(`${base}/api/v1/rocks/5`, (err, res, body) => {
           res.statusCode.should.equal(404);
           res.headers['content-type'].should.contain('application/json');
           body = JSON.parse(body);
           body.status.should.eql('error');
-          body.message.should.eql('That boulder does not exist.');
+          body.message.should.eql('That rock does not exist.');
           done();
         });
       });

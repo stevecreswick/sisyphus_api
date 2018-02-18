@@ -6,7 +6,7 @@ const session = require('koa-session');
 const passport = require('koa-passport');
 
 const indexRoutes = require('./routes/index');
-const boulderRoutes = require('./routes/boulders');
+const rockRoutes = require('./routes/rocks');
 const authRoutes = require('./routes/auth');
 const store = require('./session');
 
@@ -36,7 +36,7 @@ app.use(passport.session());
 
 // routes
 app.use(indexRoutes.routes());
-app.use(boulderRoutes.routes());
+app.use(rockRoutes.routes());
 app.use(authRoutes.routes());
 
 // server

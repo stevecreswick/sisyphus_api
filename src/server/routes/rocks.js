@@ -1,15 +1,15 @@
 const Router = require('koa-router');
-const queries = require('../db/queries/boulders');
+const queries = require('../db/queries/rocks');
 
 const router = new Router();
-const BASE_URL = `/api/v1/boulders`;
+const BASE_URL = `/api/v1/rocks`;
 
 router.get(BASE_URL, async (ctx) => {
   try {
-    const boulders = await queries.getAllBoulders();
+    const rocks = await queries.getAllRocks();
     ctx.body = {
       status: 'success',
-      data: boulders
+      data: rocks
     };
   } catch (err) {
     console.log(err)
@@ -18,17 +18,17 @@ router.get(BASE_URL, async (ctx) => {
 
 router.get(`${BASE_URL}/:id`, async (ctx) => {
   try {
-    const boulder = await queries.getSingleBoulder(ctx.params.id);
-    if (boulder.length) {
+    const rock = await queries.getSingleRock(ctx.params.id);
+    if (rock.length) {
       ctx.body = {
         status: 'success',
-        data: boulder
+        data: rock
       };
     } else {
       ctx.status = 404;
       ctx.body = {
         status: 'error',
-        message: 'That boulder does not exist.'
+        message: 'That rock does not exist.'
       };
     }
   } catch (err) {
@@ -36,19 +36,19 @@ router.get(`${BASE_URL}/:id`, async (ctx) => {
   }
 });
 
-router.get(`${BASE_URL}/:id/boulders`, async (ctx) => {
+router.get(`${BASE_URL}/:id/rocks`, async (ctx) => {
   try {
-    const boulder = await queries.getBoulderBoulders(ctx.params.id);
-    if (boulder.length) {
+    const rock = await queries.getRockRocks(ctx.params.id);
+    if (rock.length) {
       ctx.body = {
         status: 'success',
-        data: boulder
+        data: rock
       };
     } else {
       ctx.status = 404;
       ctx.body = {
         status: 'error',
-        message: 'That boulder does not exist.'
+        message: 'That rock does not exist.'
       };
     }
   } catch (err) {
@@ -58,12 +58,12 @@ router.get(`${BASE_URL}/:id/boulders`, async (ctx) => {
 
 router.post(`${BASE_URL}`, async (ctx) => {
   try {
-    const boulder = await queries.addBoulder(ctx.request.body);
-    if (boulder.length) {
+    const rock = await queries.addRock(ctx.request.body);
+    if (rock.length) {
       ctx.status = 201;
       ctx.body = {
         status: 'success',
-        data: boulder
+        data: rock
       };
     } else {
       ctx.status = 400;
@@ -83,18 +83,18 @@ router.post(`${BASE_URL}`, async (ctx) => {
 
 router.put(`${BASE_URL}/:id`, async (ctx) => {
   try {
-    const boulder = await queries.updateBoulder(ctx.params.id, ctx.request.body);
-    if (boulder.length) {
+    const rock = await queries.updateRock(ctx.params.id, ctx.request.body);
+    if (rock.length) {
       ctx.status = 200;
       ctx.body = {
         status: 'success',
-        data: boulder
+        data: rock
       };
     } else {
       ctx.status = 404;
       ctx.body = {
         status: 'error',
-        message: 'That boulder does not exist.'
+        message: 'That rock does not exist.'
       };
     }
   } catch (err) {
@@ -108,18 +108,18 @@ router.put(`${BASE_URL}/:id`, async (ctx) => {
 
 router.delete(`${BASE_URL}/:id`, async (ctx) => {
   try {
-    const boulder = await queries.deleteBoulder(ctx.params.id);
-    if (boulder.length) {
+    const rock = await queries.deleteRock(ctx.params.id);
+    if (rock.length) {
       ctx.status = 200;
       ctx.body = {
         status: 'success',
-        data: boulder
+        data: rock
       };
     } else {
       ctx.status = 404;
       ctx.body = {
         status: 'error',
-        message: 'That boulder does not exist.'
+        message: 'That rock does not exist.'
       };
     }
   } catch (err) {
