@@ -160,14 +160,14 @@ describe('routes : rocks', () => {
 // PUT Boulders
 // --------------------------------------------------------------------
 
-  describe('PUT /api/v1/rocks', () => {
+  describe('PATCH /api/v1/rocks', () => {
     it('should return the rock that was updated', (done) => {
       knex('rocks')
       .select('*')
       .then((rock) => {
         const rockObject = rock[0];
         chai.request(server)
-        .put(`/api/v1/rocks/${rockObject.id}`)
+        .patch(`/api/v1/rocks/${rockObject.id}`)
         .send({
           active: false
         })
@@ -198,7 +198,7 @@ describe('routes : rocks', () => {
 
     it('should throw an error if the rock does not exist', (done) => {
       chai.request(server)
-      .put('/api/v1/rocks/9999999')
+      .patch('/api/v1/rocks/9999999')
       .send({
         active: false
       })
