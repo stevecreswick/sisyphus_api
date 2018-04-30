@@ -84,7 +84,7 @@ router.post(`${BASE_URL}`, async (ctx) => {
 
 router.put(`${BASE_URL}/:id`, async (ctx) => {
   try {
-    const rock = await queries.updateRock(ctx.params.id );
+    const rock = await queries.updateRock(ctx.params.id);
 
     if (rock.length) {
       ctx.status = 200;

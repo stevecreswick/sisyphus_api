@@ -7,6 +7,9 @@ const refresh = require('koa-refresh');
 const session = require('koa-session');
 const passport = require('koa-passport');
 
+const Router = require('koa-router');
+const router = new Router();
+
 const indexRoutes = require('./routes/index');
 const rockRoutes = require('./routes/rocks');
 const authRoutes = require('./routes/auth');
@@ -32,38 +35,28 @@ async function responseTime (ctx, next) {
   ctx.set('X-ResponseTime', ellapsed)
 }
 
-app.use(responseTime);
-
-// logging
-// create a write stream (in append mode)
 const accessLogStream = fs.createWriteStream( __dirname + '/access.log',
                                              { flags: 'a' });
 
-app.use(morgan('combined', { stream: accessLogStream }));
-app.use(morgan('dev'));
+app
+  .use(responseTime)
+  .use( async function(ctx, next) {
+    console.log('THIS WORKS');
+    console.log(ctx.request);
 
-// sessions
-app.keys = ['super-secret-key'];
-app.use(session({ store }, app));
+    await next()
+  })
+  .use(morgan('combined', { stream: accessLogStream }))
+  .use(morgan('dev'))
 
-// body parser
-app.use(bodyParser());
+  .use( cors( { methods: ['GET', 'PATCH', 'POST' ] } ) )
+  .use(bodyParser())
 
-// CORS
-app.use( cors( { methods: ['GET', 'PATCH', 'POST'] } ) );
-
-// authentication
-require('./auth');
-app.use(passport.initialize());
-app.use(passport.session());
-
-// routes
-app.use(indexRoutes.routes());
-app.use(rockRoutes.routes());
-app.use(authRoutes.routes());
-
-// Do Not Allow for Undefined Methods
-// app.use(router.allowedMethods())
+  // Routing
+  .use(indexRoutes.routes())
+  .use(rockRoutes.routes())
+  .use(authRoutes.routes())
+  // .use(router.allowedMethods());
 
 // server
 const server = app.listen(PORT, () => {
@@ -71,3 +64,21 @@ const server = app.listen(PORT, () => {
 });
 
 module.exports = server;
+
+
+// // sessions
+// app.keys = ['super-secret-key'];
+// app.use(session({ store }, app));
+
+// body parser
+
+// authentication
+// require('./auth');
+// app.use(passport.initialize());
+// app.use(passport.session());
+
+// routes
+
+
+// Do Not Allow for Undefined Methods
+// app.use(router.allowedMethods())
